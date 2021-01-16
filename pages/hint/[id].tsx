@@ -3,8 +3,7 @@ import { useGeolocation } from "react-use";
 import { Button, Container, Row } from "react-bootstrap";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useMemo } from "react";
-import { distm, Point } from "../../services/geo";
+import { distm } from "../../services/geo";
 import useSWR from "swr";
 import { fetcher } from "../../services/fetcher";
 import { GoalResponse } from "../../interfaces/goalResponse";
@@ -14,17 +13,18 @@ const Hint = () => {
   const router = useRouter();
   const { id } = router.query;
   const { data, error } = useSWR<GoalResponse[]>(`/api/goal?id=${id}`, fetcher);
-
-  if (!data) return <div>loading...</div>;
-  console.log(data);
-
   const { latitude, longitude } = state;
+  const currentPoint =
+    latitude && longitude ? { lat: latitude, lng: longitude } : null;
+
+  if (!data || !currentPoint) return <div>loading...</div>;
+  if (error) return <div>failed to load</div>;
+
+  console.log(data);
   const quest = data[0];
   const questData = quest.data;
   const goalPoint = { lat: questData.lat, lng: questData.lng };
-
-  const from = latitude && longitude ? { lat: latitude, lng: longitude } : null;
-  const dist = distm(from, goalPoint);
+  const dist = distm(currentPoint, goalPoint);
 
   return (
     <Container>
@@ -32,15 +32,23 @@ const Hint = () => {
         <h1>id: {id}</h1>
       </Row>
       <Row>
-        <h2>lat: {state.latitude}</h2>
-        <h2>lon: {state.longitude}</h2>
-        <h2>距離: {dist}m</h2>
+        {currentPoint && (
+          <>
+            <h2>lat: {currentPoint.lat}</h2>
+            <h2>lon: {currentPoint.lng}</h2>
+            <h2>距離: {dist}m</h2>
+          </>
+        )}
       </Row>
-      <Row>
-        {/* {questData.hints.map((h) => (
-          <p>{}</p>
-        ))} */}
-      </Row>
+      {questData.hints.map((h) => (
+        <Row>
+          <h3>{h.name}</h3>
+          <p>トリガー: {h.trigger.dist}</p>
+          <h2>
+            範囲内判定: {dist && dist <= h.trigger.dist ? "範囲内" : "範囲外"}
+          </h2>
+        </Row>
+      ))}
       <Row>
         <Link href="/good">
           <Button variant="primary">
