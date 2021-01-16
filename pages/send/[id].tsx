@@ -20,7 +20,7 @@ const Send = () => {
 
   const [cameraFlag, setCameraFlag] = useState<boolean>(false);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const { data, error } = useSWR<any>(imageUrl, post);
+  const { data } = useSWR<any>(imageUrl, post);
 
   const capture = React.useCallback(() => {
     if (webcamRef.current === null) {
