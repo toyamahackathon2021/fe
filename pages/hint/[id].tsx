@@ -1,6 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useGeolocation } from "react-use";
-import { Button, Container, Col, Image, ListGroup, Navbar, Row } from "react-bootstrap";
+import {
+  Button,
+  Container,
+  Col,
+  ListGroup,
+  Navbar,
+  Row,
+} from "react-bootstrap";
 import { useRouter } from "next/router";
 import { distm } from "../../services/geo";
 import useSWR from "swr";
@@ -60,7 +67,7 @@ padding-top: 50px;
   color: #fff;
   border: none;
  }
-`
+`;
 const Hint = () => {
   const state = useGeolocation();
   const router = useRouter();
@@ -81,46 +88,57 @@ const Hint = () => {
 
   return (
     <>
-    <style>{style}</style>
+      <style>{style}</style>
       <div className="wrapper">
-    <Container>
-      <Navbar fixed="top" className="navWrapper">Mission<br/>{questData.mission_title}</Navbar>
-      {reverse(questData.hints).map((h, idx) => {
-        const length = questData.hints.length;
+        <Container>
+          <Navbar fixed="top" className="navWrapper">
+            Mission
+            <br />
+            {questData.mission_title}
+          </Navbar>
+          {reverse(questData.hints).map((h, idx) => {
+            const length = questData.hints.length;
 
-        if (idx === length - 1) {
-          return (
-            <Row className="hintWrapper">
-              <Col md="auto" className="center">
-                <Button variant={"warning"} size="lg" block>
-                  ヒント1を見る
-                </Button>
-              </Col>
-            </Row>
-          );
-        }
+            if (idx === length - 1) {
+              return (
+                <Row className="hintWrapper">
+                  <Col md="auto" className="center">
+                    <Button variant={"warning"} size="lg" block>
+                      ヒント1を見る
+                    </Button>
+                  </Col>
+                </Row>
+              );
+            }
 
-        const isInGeoFence = dist && dist <= h.trigger.dist ? true : false;
+            const isInGeoFence = dist && dist <= h.trigger.dist ? true : false;
 
-        return (
-          <Row>
-            <ListGroup horizontal={true} className="my-2 hintListWrapper" key={idx} >
-              <ListGroup.Item className="hintItem">
-                <Button
-                  variant={isInGeoFence ? "warning" : "secondary"}
-                  active={isInGeoFence}
+            return (
+              <Row>
+                <ListGroup
+                  horizontal={true}
+                  className="my-2 hintListWrapper"
+                  key={idx}
                 >
-                  ヒント{length - idx}を見る
-                </Button>
-              </ListGroup.Item>
-              <ListGroup.Item className="hintItem">
-                宝まで<br/>{h.trigger.dist}m<br/>以内で開放
-              </ListGroup.Item>
-            </ListGroup>
-          </Row>
-        );
-      })}
-      {/* {questData.hints.map((h) => (
+                  <ListGroup.Item className="hintItem">
+                    <Button
+                      variant={isInGeoFence ? "warning" : "secondary"}
+                      active={isInGeoFence}
+                    >
+                      ヒント{length - idx}を見る
+                    </Button>
+                  </ListGroup.Item>
+                  <ListGroup.Item className="hintItem">
+                    宝まで
+                    <br />
+                    {h.trigger.dist}m<br />
+                    以内で開放
+                  </ListGroup.Item>
+                </ListGroup>
+              </Row>
+            );
+          })}
+          {/* {questData.hints.map((h) => (
         <Row>
           <h3>{h.name}</h3>
           <p>トリガー: {h.trigger.dist}</p>
@@ -129,7 +147,7 @@ const Hint = () => {
           </h2>
         </Row>
       ))} */}
-      {/* <Row>
+          {/* <Row>
         <Link href={`/send/${id}`}>
           <Button variant="primary">
             <a>写真送信</a>
@@ -155,7 +173,7 @@ const Hint = () => {
           </>
         )}
       </Row> */}
-    </Container>
+        </Container>
       </div>
     </>
   );

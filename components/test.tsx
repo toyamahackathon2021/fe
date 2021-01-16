@@ -1,34 +1,47 @@
-import * as React from 'react';
+import { useRouter } from "next/router";
+import * as React from "react";
 interface Props {
-  mission_title: string,
-  duration: string
+  mission_title: string;
+  duration: string;
+  id: number | null;
 }
 interface State {}
 
-const styleGenerator = ({ mission_title }) => ({
-  display: mission_title ? 'initial' : 'initial',
+const styleGenerator = (mission_title: string): React.CSSProperties => ({
+  display: mission_title ? "initial" : "initial",
   border: "none",
   padding: "0 16px",
   color: "#fff",
   background: "#000",
   position: "absolute",
-  bottom: 0
+  bottom: 0,
 });
 
-const buttonStyleGenerator = ({ button }) => ({
-  background: "#FF9933"
+const buttonStyleGenerator = (button: string) => ({
+  background: "#FF9933",
 });
 
-class SelectTreasureInfo extends React.Component<Props, State> {
-
-  render() {
-    return (
-      <div className="col-12 justify-content-md-center" style={styleGenerator(this.props.mission_title)} >
-        <h4 className="col-12 justify-content-md-center" >{this.props.mission_title}</h4>
-        <div className="col-12 justify-content-md-center" >{this.props.duration}</div>
-        <button className="col-12 justify-content-md-center" style={buttonStyleGenerator(this.props.mission_title)}>宝探しを始める</button>
-      </div>
-    );
-  }
+const SelectTreasureInfo: React.FC<Props> = (props) => {
+  const router = useRouter();
+  return (
+    <div
+      className="col-12 justify-content-md-center"
+      style={styleGenerator(props.mission_title)}
+    >
+      <h4 className="col-12 justify-content-md-center">
+        {props.mission_title}
+      </h4>
+      <div className="col-12 justify-content-md-center">{props.duration}</div>
+      <button
+        className="col-12 justify-content-md-center"
+        style={buttonStyleGenerator(props.mission_title)}
+        onClick={() => {
+          props.id && router.push(`/hint/${props.id}`);
+        }}
+      >
+        宝探しを始める
+      </button>
+    </div>
+  );
 };
 export default SelectTreasureInfo;

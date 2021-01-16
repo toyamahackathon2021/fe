@@ -1,15 +1,33 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import Link from "next/link";
-import { useState } from 'react';
+import { useCallback, useState } from "react";
 import { Container, Row, ListGroup, Button } from "react-bootstrap";
 import useSWR from "swr";
 import { GoalResponse } from "../interfaces/goalResponse";
 import { fetcher } from "../services/fetcher";
-import SelectTreasureInfo from "../components/test"
+import SelectTreasureInfo from "../components/test";
+type missionType = {
+  mission_title: string;
+  duration: string;
+};
 
 const IndexPage = () => {
   const { data, error } = useSWR<GoalResponse[]>("/api/goal", fetcher);
   console.log(data);
+
+  const [mission, setMission] = useState<missionType>({
+    mission_title: "",
+    duration: "",
+  });
+  const [missionId, setMissionId] = useState<number | null>(null);
+
+  const handleTreasureClick = useCallback(
+    (treasure: any) => {
+      if (!treasure) return;
+      setMission({ mission_title: treasure.name, duration: treasure.duration });
+      setMissionId(treasure.id);
+    },
+    [setMission]
+  );
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
@@ -21,17 +39,7 @@ const IndexPage = () => {
       duration: d.data ? d.data.duration : "",
     };
   });
-  type missionType = {
-    mission_title: string;
-    duration: string;
-  }
-  const [mission, setMission] = useState<missionType>( {mission_title: "", duration: ""});
 
-
-  let handleTreasureClick = (treasure) => {
-    if(!treasure) return;
-    setMission({mission_title: treasure.name, duration: treasure.duration})
-  };
   console.log(questList);
 
   return (
@@ -41,9 +49,11 @@ const IndexPage = () => {
       </Row>
       <Row className="col-12 justify-content-md-center">
         <ListGroup>
-          {questList.map((q) => (
+          {questList.map((q, id) => (
             <ListGroup.Item>
-              <Button onClick={() => handleTreasureClick(q)} key={q}>{q.name}</Button>
+              <Button onClick={() => handleTreasureClick(q)} key={id}>
+                {q.name}
+              </Button>
               {/*
               <Link href={`/hint/${q.id}`}>{q.name}</Link>
               */}
@@ -51,7 +61,11 @@ const IndexPage = () => {
           ))}
         </ListGroup>
       </Row>
-      <SelectTreasureInfo mission_title={mission.mission_title} duration={mission.duration}></SelectTreasureInfo>
+      <SelectTreasureInfo
+        mission_title={mission.mission_title}
+        duration={mission.duration}
+        id={missionId}
+      ></SelectTreasureInfo>
     </Container>
   );
 };
