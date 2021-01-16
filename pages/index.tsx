@@ -1,9 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
-import { Container, Row, ListGroup } from "react-bootstrap";
+import { useState } from 'react';
+import { Container, Row, ListGroup, Button } from "react-bootstrap";
 import useSWR from "swr";
 import { GoalResponse } from "../interfaces/goalResponse";
 import { fetcher } from "../services/fetcher";
+import SelectTreasureInfo from "../components/test"
 
 const IndexPage = () => {
   const { data, error } = useSWR<GoalResponse[]>("/api/goal", fetcher);
@@ -16,24 +18,40 @@ const IndexPage = () => {
     return {
       id: d.id,
       name: d.data ? d.data.mission_title : "",
+      duration: d.data ? d.data.duration : "",
     };
   });
+  type missionType = {
+    mission_title: string;
+    duration: string;
+  }
+  const [mission, setMission] = useState<missionType>( {mission_title: "", duration: ""});
+
+
+  let handleTreasureClick = (treasure) => {
+    if(!treasure) return;
+    setMission({mission_title: treasure.name, duration: treasure.duration})
+  };
   console.log(questList);
 
   return (
-    <Container>
-      <Row className="justify-content-md-center">
+    <Container fluid="lg">
+      <Row className="col-12 justify-content-md-center">
         <h1>富山 トレジャーハント</h1>
       </Row>
-      <Row className="justify-content-md-center">
+      <Row className="col-12 justify-content-md-center">
         <ListGroup>
           {questList.map((q) => (
             <ListGroup.Item>
+              <Button onClick={() => handleTreasureClick(q)} key={q}>{q.name}</Button>
+              {/*
               <Link href={`/hint/${q.id}`}>{q.name}</Link>
+              */}
             </ListGroup.Item>
           ))}
         </ListGroup>
       </Row>
+      <SelectTreasureInfo mission_title={mission.mission_title} duration={mission.duration}></SelectTreasureInfo>
     </Container>
   );
 };
