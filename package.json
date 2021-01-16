@@ -18,6 +18,7 @@
     "turf": "^3.0.14"
   },
   "devDependencies": {
+    "@types/next": "^9.0.0",
     "@types/node": "^12.12.21",
     "@types/react": "^16.9.16",
     "@types/react-bootstrap": "^0.32.25",

@@ -39,7 +39,7 @@ const IndexPage = () => {
         <ListGroup>
           {questList.map((q) => (
             <ListGroup.Item>
-              <Link href="/main">{q.name}</Link>
+              <Link href={`/hint/${q.id}`}>{q.name}</Link>
             </ListGroup.Item>
           ))}
         </ListGroup>
