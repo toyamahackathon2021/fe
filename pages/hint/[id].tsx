@@ -17,7 +17,7 @@ const Hint = () => {
   const currentPoint =
     latitude && longitude ? { lat: latitude, lng: longitude } : null;
 
-  if (!data || !currentPoint) return <div>loading...</div>;
+  if (!data) return <div>loading...</div>;
   if (error) return <div>failed to load</div>;
 
   console.log(data);
