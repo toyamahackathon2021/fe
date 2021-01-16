@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import { Button, Container, Row } from "react-bootstrap";
 import Webcam from "react-webcam";
+import useSWR from "swr";
+import { post } from "../../services/fetcher";
 
 const videoConstraints = {
   width: 1280,
@@ -18,6 +20,7 @@ const Send = () => {
 
   const [cameraFlag, setCameraFlag] = useState<boolean>(false);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const { data, error } = useSWR<any>(imageUrl, post);
 
   const capture = React.useCallback(() => {
     if (webcamRef.current === null) {
@@ -25,12 +28,12 @@ const Send = () => {
     }
 
     const imageSrc = webcamRef.current.getScreenshot();
-    // setImageUrl(imageSrc);
-    router.push(`/good/${id}`);
-    console.log(imageSrc);
+    setImageUrl(imageSrc);
+    // router.push(`/good/${id}`);
+    // console.log(imageSrc);
   }, [webcamRef, setImageUrl]);
 
-  console.log(imageUrl);
+  console.log(data);
 
   return (
     <Container>
