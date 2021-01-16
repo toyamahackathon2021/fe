@@ -2,8 +2,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
 import { Button, Container, Row, ListGroup } from "react-bootstrap";
 import { useGeolocation } from "react-use";
+import useSWR from "swr";
+import { fetcher } from "../services/fetcher";
 
 const IndexPage = () => {
+  const { data, error } = useSWR("/api/images?name=buri", fetcher);
+  console.log(data);
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+
   const questList = [
     {
       name: "富山城",
@@ -32,6 +40,7 @@ const IndexPage = () => {
           ))}
         </ListGroup>
       </Row>
+      <h1>{JSON.stringify(data)}</h1>
     </Container>
   );
 };
