@@ -6,26 +6,33 @@ import useSWR from "swr";
 import { fetcher } from "../services/fetcher";
 
 const IndexPage = () => {
-  const { data, error } = useSWR("/api/images?name=buri", fetcher);
+  const { data, error } = useSWR("/api/goal", fetcher);
   console.log(data);
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
 
-  const questList = [
-    {
-      name: "富山城",
-      id: 1,
-    },
-    {
-      name: "ブリ",
-      id: 2,
-    },
-    {
-      name: "スタバ",
-      id: 3,
-    },
-  ];
+  // const questList = [
+  //   {
+  //     name: "富山城",
+  //     id: 1,
+  //   },
+  //   {
+  //     name: "ブリ",
+  //     id: 2,
+  //   },
+  //   {
+  //     name: "スタバ",
+  //     id: 3,
+  //   },
+  // ];
+
+  const questList: { id: string; name: string }[] = data.map((d: any) => {
+    return {
+      id: d.id,
+      name: d.data ? d.data.name : "",
+    };
+  });
 
   return (
     <Container>
@@ -41,7 +48,6 @@ const IndexPage = () => {
           ))}
         </ListGroup>
       </Row>
-      <h1>{JSON.stringify(data)}</h1>
     </Container>
   );
 };

@@ -4,8 +4,7 @@ import goal_1 from "./goal_1.json";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const query = req.query;
-  console.log(query);
-  const id = query["id"][0];
+  const id = query["id"];
 
   const all = [
     {
@@ -22,7 +21,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     },
   ];
 
-  const data = all.filter((d) => d.id === id);
+  const data = id === undefined ? all : all.filter((d) => d.id === id);
 
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
