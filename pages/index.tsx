@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
-import { Container, Row, ListGroup } from "react-bootstrap";
+import { Container, Row, ListGroup, Button } from "react-bootstrap";
 import useSWR from "swr";
 import { GoalResponse } from "../interfaces/goalResponse";
 import { fetcher } from "../services/fetcher";
@@ -20,6 +20,26 @@ const IndexPage = () => {
       duration: d.data ? d.data.duration : "",
     };
   });
+
+  type selectedTreasureType = {
+    mission_title: string;
+    duration: string;
+  };
+
+  let selectedTreasure:selectedTreasureType = {
+    mission_title: "",
+    duration: ""
+  }
+
+  let handleTreasureClick = (treasure) => {
+    console.log("handleeeeeeeeed::", treasure.name);
+    if(!treasure) return;
+    console.log("代入")
+    selectedTreasure.mission_title = treasure.name;
+    selectedTreasure.duration = treasure.duration;
+    
+    console.log(selectedTreasure)
+  };
   console.log(questList);
 
   return (
@@ -31,12 +51,15 @@ const IndexPage = () => {
         <ListGroup>
           {questList.map((q) => (
             <ListGroup.Item>
+              <Button onClick={() => handleTreasureClick(q)} key={q}>{q.name}</Button>
+              {/*
               <Link href={`/hint/${q.id}`}>{q.name}</Link>
+              */}
             </ListGroup.Item>
           ))}
         </ListGroup>
       </Row>
-      <SelectTreasureInfo mission_title="みっしょん" duration="20分ぐらい？"></SelectTreasureInfo>
+      <SelectTreasureInfo mission_title={selectedTreasure.mission_title} duration={selectedTreasure.duration}></SelectTreasureInfo>
     </Container>
   );
 };
