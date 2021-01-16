@@ -10,9 +10,10 @@ const style = `
   padding: 10px;
  }
  .wrapper {
+  height: 100vh;
+  padding: 20px;
   background-image: url("/bg.png");
   background-color: rgba(0, 0, 0, 0.2);
-  padding: 20px;
  }
  .title {
   font-size: 20px;
