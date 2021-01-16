@@ -25,7 +25,8 @@ const Send = () => {
     }
 
     const imageSrc = webcamRef.current.getScreenshot();
-    setImageUrl(imageSrc);
+    // setImageUrl(imageSrc);
+    router.push(`/good/${id}`);
     console.log(imageSrc);
   }, [webcamRef, setImageUrl]);
 

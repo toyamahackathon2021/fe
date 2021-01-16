@@ -50,6 +50,11 @@ const Hint = () => {
         </Row>
       ))}
       <Row>
+        <Link href={`/send/${id}`}>
+          <Button variant="primary">
+            <a>写真送信</a>
+          </Button>
+        </Link>
         <Link href="/good">
           <Button variant="primary">
             <a>正解画面遷移</a>
