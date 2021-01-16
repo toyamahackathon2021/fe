@@ -23,18 +23,6 @@ const IndexPage = () => {
       <Row>
         <h1>富山 トレジャーハント</h1>
       </Row>
-      {/* <Row>
-        <Link href="/main">
-          <Button variant="primary">
-            <a>ブリ main</a>
-          </Button>
-        </Link>
-        <Link href="/goal">
-          <Button variant="primary">
-            <a>ブリ goal</a>
-          </Button>
-        </Link>
-      </Row> */}
       <Row>
         <ListGroup>
           {questList.map((q) => (

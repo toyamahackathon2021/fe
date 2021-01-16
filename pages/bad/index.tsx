@@ -1,10 +1,15 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Row } from "react-bootstrap";
 
 const Bad = () => {
   return (
-    <>
-      <h1>Bad画面</h1>
-    </>
+    <Container>
+      <Row>
+        <h1>失敗！</h1>
+      </Row>
+      <Row>
+        <h1>やり直し！</h1>
+      </Row>
+    </Container>
   );
 };
 

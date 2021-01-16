@@ -1,11 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Container, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 const Good = () => {
   return (
     <Container>
       <Row>
-        <h1>Good画面</h1>
+        <h1>正解！</h1>
+      </Row>
+      <Row>
+        <h1>おめでとう！</h1>
       </Row>
     </Container>
   );
