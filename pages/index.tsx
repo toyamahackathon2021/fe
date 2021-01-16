@@ -1,27 +1,50 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
-import { Button } from "react-bootstrap";
+import { Button, Container, Row, ListGroup } from "react-bootstrap";
 import { useGeolocation } from "react-use";
 
 const IndexPage = () => {
-  const state = useGeolocation();
-
+  const questList = [
+    {
+      name: "富山城",
+      id: 1,
+    },
+    {
+      name: "ブリ",
+      id: 2,
+    },
+    {
+      name: "スタバ",
+      id: 3,
+    },
+  ];
   return (
-    <>
-      <h1>ブリ キャッシング</h1>
-      <Link href="/main">
-        <Button variant="primary">
-          <a>ブリ main</a>
-        </Button>
-      </Link>
-      <Link href="/goal">
-        <Button variant="primary">
-          <a>ブリ goal</a>
-        </Button>
-      </Link>
-      <h2>lat: {state.latitude}</h2>
-      <h2>lon: {state.longitude}</h2>
-    </>
+    <Container>
+      <Row>
+        <h1>富山 トレジャーハント</h1>
+      </Row>
+      {/* <Row>
+        <Link href="/main">
+          <Button variant="primary">
+            <a>ブリ main</a>
+          </Button>
+        </Link>
+        <Link href="/goal">
+          <Button variant="primary">
+            <a>ブリ goal</a>
+          </Button>
+        </Link>
+      </Row> */}
+      <Row>
+        <ListGroup>
+          {questList.map((q) => (
+            <ListGroup.Item>
+              <Link href="/main">{q.name}</Link>
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+      </Row>
+    </Container>
   );
 };
 
