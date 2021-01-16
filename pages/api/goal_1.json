@@ -2,6 +2,8 @@
     "name": "富山城",
     "name_eng": "toyama castle",
     "display_condition": "none",
+    "duration": "30-40分程度", 
+    "duration_info": "所要見込み時間はヒント2が表示できるようになってからの見込み時間です。",
     "lat": "36.69279330393778",
     "lng": "137.21151779965973",
     "hints": {
