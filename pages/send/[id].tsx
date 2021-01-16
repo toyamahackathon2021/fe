@@ -1,10 +1,29 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
-import { Button, Container, Row } from "react-bootstrap";
+import { Container, Col, Row, Button, Image } from "react-bootstrap";
 import Webcam from "react-webcam";
 import useSWR from "swr";
 import { post } from "../../services/fetcher";
+
+const style = `
+* {
+  text-align: center;
+}
+.container {
+  background-color: #fff;
+  padding: 10px;
+ }
+ .wrapper {
+  height: 100vh;
+  padding: 20px;
+  background-image: url("/bg.png");
+  background-color: rgba(0, 0, 0, 0.2);
+ }
+ .title {
+  font-size: 20px;
+ }
+`
 
 const videoConstraints = {
   width: 1280,
@@ -36,12 +55,32 @@ const Send = () => {
   console.log(data);
 
   return (
+    <>
+      <style>{style}</style>
+      <div className="wrapper">
     <Container>
+      <Row>
+        <Col md="auto" className="center">
+          <h1 className="title">写真を送信して<br/>宝箱を開けよう！</h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col md="auto" className="center">
+          <Image
+            width={90}
+            height={90}
+            alt="takarabako"
+            src="/kaizoku_takarabako.png"
+          />
+        </Col>
+      </Row>
       {!cameraFlag ? (
         <Row>
+          <Col md="auto" className="center">
           <Button variant="warning" onClick={() => setCameraFlag(true)}>
             写真を撮る
           </Button>
+          </Col>
         </Row>
       ) : (
         <>
@@ -74,7 +113,15 @@ const Send = () => {
       )}
       {/* {data && data.predictions.map((p: any) => <p>P:{p.probability}</p>)} */}
       <Row>{data && JSON.stringify(data)}</Row>
+      <br/>
+      <Row>
+        <Col md="auto" className="center">
+          <Button variant="outline-primary">戻る</Button>
+        </Col>
+      </Row>
     </Container>
+      </div>
+    </>
   );
 };
 
