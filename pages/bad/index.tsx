@@ -1,15 +1,63 @@
-import { Container, Row } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Col, Row, Button, Image } from "react-bootstrap";
+
+const style = `
+* {
+  text-align: center;
+}
+.container {
+  background-color: #fff;
+  padding: 10px;
+ }
+ .wrapper {
+  height: 100vh;
+  padding: 20px;
+  background-image: url("/bg.png");
+  background-color: rgba(0, 0, 0, 0.2);
+ }
+ .title {
+  font-size: 20px;
+ }
+`
 
 const Bad = () => {
   return (
-    <Container>
-      <Row>
-        <h1>失敗！</h1>
-      </Row>
-      <Row>
-        <h1>やり直し！</h1>
-      </Row>
-    </Container>
+    <>
+      <style>{style}</style>
+      <div className="wrapper">
+      <Container>
+        <Row>
+          <Col md="auto" className="center">
+            <h1 className="title">残念！</h1>
+          </Col>
+        </Row>
+          <Col md="auto" className="center">
+            <Image
+              width={107}
+              height={91}
+              alt="bad"
+              src="/kaizoku_mark.png"
+            />
+          </Col>
+        <Row>
+          <Col md="auto" className="center">
+            <p>写真をもう一度確認してみよう！</p>
+          </Col>
+        </Row>
+        <Row>
+          <Col md="auto" className="center">
+            <Button variant="warning">もう一度送る</Button>
+          </Col>
+        </Row>
+        <br/>
+        <Row>
+          <Col md="auto" className="center">
+            <Button variant="outline-primary">戻る</Button>
+          </Col>
+        </Row>
+      </Container>
+      </div>
+    </>
   );
 };
 
