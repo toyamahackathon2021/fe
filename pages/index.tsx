@@ -26,12 +26,13 @@ const IndexPage = () => {
       id: 3,
     },
   ];
+
   return (
     <Container>
-      <Row>
+      <Row className="justify-content-md-center">
         <h1>富山 トレジャーハント</h1>
       </Row>
-      <Row>
+      <Row className="justify-content-md-center">
         <ListGroup>
           {questList.map((q) => (
             <ListGroup.Item>
