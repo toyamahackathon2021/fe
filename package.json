@@ -8,8 +8,10 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "bootstrap": "^4.5.3",
     "next": "latest",
     "react": "^16.12.0",
+    "react-bootstrap": "^1.4.3",
     "react-dom": "^16.12.0",
     "react-use": "^15.3.8",
     "swr": "^0.4.0"
@@ -17,6 +19,7 @@
   "devDependencies": {
     "@types/node": "^12.12.21",
     "@types/react": "^16.9.16",
+    "@types/react-bootstrap": "^0.32.25",
     "@types/react-dom": "^16.9.4",
     "typescript": "4.0"
   },

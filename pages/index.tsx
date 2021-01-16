@@ -1,26 +1,28 @@
-import Link from 'next/link'
-import {useGeolocation} from 'react-use'
+import "bootstrap/dist/css/bootstrap.min.css";
+import Link from "next/link";
+import { Button } from "react-bootstrap";
+import { useGeolocation } from "react-use";
 
 const IndexPage = () => {
   const state = useGeolocation();
 
   return (
-  <>
-    <h1>ブリ キャッシング</h1>
+    <>
+      <h1>ブリ キャッシング</h1>
       <Link href="/main">
-        <a>ブリ main</a>
+        <Button variant="primary">
+          <a>ブリ main</a>
+        </Button>
       </Link>
       <Link href="/goal">
-        <a>ブリ goal</a>
+        <Button variant="primary">
+          <a>ブリ goal</a>
+        </Button>
       </Link>
-      <h2>
-        lat: {state.latitude}
-      </h2>
-      <h2>
-        lon: {state.longitude}
-      </h2>
-  </>
-  )
-}
+      <h2>lat: {state.latitude}</h2>
+      <h2>lon: {state.longitude}</h2>
+    </>
+  );
+};
 
-export default IndexPage
+export default IndexPage;
