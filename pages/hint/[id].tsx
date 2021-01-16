@@ -13,8 +13,9 @@ import { distm } from "../../services/geo";
 import useSWR from "swr";
 import { fetcher } from "../../services/fetcher";
 import { GoalResponse } from "../../interfaces/goalResponse";
-import React from "react";
+import React, { useCallback, useRef } from "react";
 import { reverse } from "lodash";
+import CenterModal from "../../components/Modal";
 
 const style = `
 * {
@@ -73,6 +74,10 @@ const Hint = () => {
   const router = useRouter();
   const { id } = router.query;
   const { data, error } = useSWR<GoalResponse[]>(`/api/goal?id=${id}`, fetcher);
+  const [modalShow, setModalShow] = React.useState(false);
+  const modalId = useRef<number>();
+  const modalTitle = useRef<string>("");
+  const modalContent = useRef<string>("");
   const { latitude, longitude } = state;
   const currentPoint =
     latitude && longitude ? { lat: latitude, lng: longitude } : null;
@@ -85,6 +90,16 @@ const Hint = () => {
   const questData = quest.data;
   const goalPoint = { lat: questData.lat, lng: questData.lng };
   const dist = distm(currentPoint, goalPoint);
+
+  const showModal = useCallback(
+    (id: number, title: string, content: string) => {
+      setModalShow(true);
+      modalId.current = id;
+      modalTitle.current = title;
+      modalContent.current = content;
+    },
+    []
+  );
 
   return (
     <>
@@ -103,7 +118,12 @@ const Hint = () => {
               return (
                 <Row className="hintWrapper">
                   <Col md="auto" className="center">
-                    <Button variant={"warning"} size="lg" block>
+                    <Button
+                      variant={"warning"}
+                      size="lg"
+                      block
+                      onClick={() => showModal(1, h.name, h.contents)}
+                    >
                       ヒント1を見る
                     </Button>
                   </Col>
@@ -124,6 +144,7 @@ const Hint = () => {
                     <Button
                       variant={isInGeoFence ? "warning" : "secondary"}
                       active={isInGeoFence}
+                      onClick={() => showModal(1, h.name, h.contents)}
                     >
                       ヒント{length - idx}を見る
                     </Button>
@@ -138,6 +159,14 @@ const Hint = () => {
               </Row>
             );
           })}
+          <CenterModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            // id={modalId.current ?? ""}
+            title={modalTitle.current ?? ""}
+            content={modalContent.current ?? ""}
+          ></CenterModal>
+
           {/* {questData.hints.map((h) => (
         <Row>
           <h3>{h.name}</h3>
