@@ -5,23 +5,26 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useMemo } from "react";
 import { distm, Point } from "../../services/geo";
-
-const goalPoint = { lat: 36.7018268, lng: 137.2126258 };
+import useSWR from "swr";
+import { fetcher } from "../../services/fetcher";
+import { GoalResponse } from "../../interfaces/goalResponse";
 
 const Hint = () => {
   const state = useGeolocation();
   const router = useRouter();
   const { id } = router.query;
+  const { data, error } = useSWR<GoalResponse[]>(`/api/goal?id=${id}`, fetcher);
 
-  const dist = useMemo(() => {
-    const { latitude, longitude } = state;
+  if (!data) return <div>loading...</div>;
+  console.log(data);
 
-    const from =
-      latitude && longitude ? { lat: latitude, lng: longitude } : null;
+  const { latitude, longitude } = state;
+  const quest = data[0];
+  const questData = quest.data;
+  const goalPoint = { lat: questData.lat, lng: questData.lng };
 
-    const dist = distm(from, goalPoint);
-    return dist;
-  }, [state]);
+  const from = latitude && longitude ? { lat: latitude, lng: longitude } : null;
+  const dist = distm(from, goalPoint);
 
   return (
     <Container>
@@ -32,6 +35,11 @@ const Hint = () => {
         <h2>lat: {state.latitude}</h2>
         <h2>lon: {state.longitude}</h2>
         <h2>距離: {dist}m</h2>
+      </Row>
+      <Row>
+        {/* {questData.hints.map((h) => (
+          <p>{}</p>
+        ))} */}
       </Row>
       <Row>
         <Link href="/good">

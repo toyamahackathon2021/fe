@@ -2,36 +2,33 @@
     "name": "富山城",
     "name_eng": "toyama castle",
     "display_condition": "none",
-    "lat": "36.69279330393778",
-    "lng": "137.21151779965973",
+    "lat": 36.69279330393778,
+    "lng": 137.21151779965973,
     "hints": {
         "hint1": {
             "name": "ヒント1",
             "trigger": {
                 "type": "initial",
-                "dist": "0" 
+                "dist": "0"
             },
             "contents": "富山城(富山城址公園)を目指そう"
-            
         },
         "hint2": {
             "name": "ヒント2",
             "trigger": {
                 "type": "geofence",
-                "dist": "500" 
+                "dist": "500"
             },
             "contents": "富山城址公園に入ろう"
-            
         },
         "hint3": {
             "name": "ヒント3",
             "trigger": {
                 "type": "geofence",
-                "dist": "100" 
+                "dist": "100"
             },
             "contents": "写真の看板を探そう。写真の看板が見つかったら、その看板を全部映るようにして写真を撮って送信してね",
             "image_url": "https://user-images.githubusercontent.com/4006425/104808524-340bee80-582a-11eb-9933-a5fb5a1b1c01.png"
-            
         }
     },
     "arrived": {

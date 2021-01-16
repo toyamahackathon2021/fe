@@ -3,10 +3,11 @@ import Link from "next/link";
 import { Button, Container, Row, ListGroup } from "react-bootstrap";
 import { useGeolocation } from "react-use";
 import useSWR from "swr";
+import { GoalResponse } from "../interfaces/goalResponse";
 import { fetcher } from "../services/fetcher";
 
 const IndexPage = () => {
-  const { data, error } = useSWR("/api/goal", fetcher);
+  const { data, error } = useSWR<GoalResponse[]>("/api/goal", fetcher);
   console.log(data);
 
   if (error) return <div>failed to load</div>;
