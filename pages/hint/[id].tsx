@@ -3,8 +3,7 @@ import { useGeolocation } from "react-use";
 import { Button, Container, Row } from "react-bootstrap";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useMemo } from "react";
-import { distm, Point } from "../../services/geo";
+import { distm } from "../../services/geo";
 import useSWR from "swr";
 import { fetcher } from "../../services/fetcher";
 import { GoalResponse } from "../../interfaces/goalResponse";
@@ -19,6 +18,7 @@ const Hint = () => {
     latitude && longitude ? { lat: latitude, lng: longitude } : null;
 
   if (!data || !currentPoint) return <div>loading...</div>;
+  if (error) return <div>failed to load</div>;
 
   console.log(data);
   const quest = data[0];

@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
-import { Button, Container, Row, ListGroup } from "react-bootstrap";
-import { useGeolocation } from "react-use";
+import { Container, Row, ListGroup } from "react-bootstrap";
 import useSWR from "swr";
 import { GoalResponse } from "../interfaces/goalResponse";
 import { fetcher } from "../services/fetcher";
