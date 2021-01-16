@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
+import { useState } from 'react';
 import { Container, Row, ListGroup, Button } from "react-bootstrap";
 import useSWR from "swr";
 import { GoalResponse } from "../interfaces/goalResponse";
@@ -20,30 +21,21 @@ const IndexPage = () => {
       duration: d.data ? d.data.duration : "",
     };
   });
-
-  type selectedTreasureType = {
+  type missionType = {
     mission_title: string;
     duration: string;
-  };
-
-  let selectedTreasure:selectedTreasureType = {
-    mission_title: "",
-    duration: ""
   }
+  const [mission, setMission] = useState<missionType>( {mission_title: "", duration: ""});
+
 
   let handleTreasureClick = (treasure) => {
-    console.log("handleeeeeeeeed::", treasure.name);
     if(!treasure) return;
-    console.log("代入")
-    selectedTreasure.mission_title = treasure.name;
-    selectedTreasure.duration = treasure.duration;
-    
-    console.log(selectedTreasure)
+    setMission({mission_title: treasure.name, duration: treasure.duration})
   };
   console.log(questList);
 
   return (
-    <Container fluid="l">
+    <Container fluid="lg">
       <Row className="col-12 justify-content-md-center">
         <h1>富山 トレジャーハント</h1>
       </Row>
@@ -59,7 +51,7 @@ const IndexPage = () => {
           ))}
         </ListGroup>
       </Row>
-      <SelectTreasureInfo mission_title={selectedTreasure.mission_title} duration={selectedTreasure.duration}></SelectTreasureInfo>
+      <SelectTreasureInfo mission_title={mission.mission_title} duration={mission.duration}></SelectTreasureInfo>
     </Container>
   );
 };

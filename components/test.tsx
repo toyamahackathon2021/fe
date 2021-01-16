@@ -24,8 +24,8 @@ class SelectTreasureInfo extends React.Component<Props, State> {
   render() {
     return (
       <div className="col-12 justify-content-md-center" style={styleGenerator(this.props.mission_title)} >
-        <h4 className="col-12 justify-content-md-center" >aaa {this.props.mission_title}</h4>
-        <div className="col-12 justify-content-md-center" >bbb {this.props.duration}</div>
+        <h4 className="col-12 justify-content-md-center" >{this.props.mission_title}</h4>
+        <div className="col-12 justify-content-md-center" >{this.props.duration}</div>
         <button className="col-12 justify-content-md-center" style={buttonStyleGenerator(this.props.mission_title)}>宝探しを始める</button>
       </div>
     );
