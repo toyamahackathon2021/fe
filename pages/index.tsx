@@ -5,6 +5,7 @@ import { useGeolocation } from "react-use";
 import useSWR from "swr";
 import { GoalResponse } from "../interfaces/goalResponse";
 import { fetcher } from "../services/fetcher";
+import SelectTreasureInfo from "../components/test"
 
 const IndexPage = () => {
   const { data, error } = useSWR<GoalResponse[]>("/api/goal", fetcher);
@@ -17,16 +18,17 @@ const IndexPage = () => {
     return {
       id: d.id,
       name: d.data ? d.data.mission_title : "",
+      duration: d.data ? d.data.duration : "",
     };
   });
   console.log(questList);
 
   return (
-    <Container>
-      <Row className="justify-content-md-center">
+    <Container fluid="l">
+      <Row className="col-12 justify-content-md-center">
         <h1>富山 トレジャーハント</h1>
       </Row>
-      <Row className="justify-content-md-center">
+      <Row className="col-12 justify-content-md-center">
         <ListGroup>
           {questList.map((q) => (
             <ListGroup.Item>
@@ -35,6 +37,7 @@ const IndexPage = () => {
           ))}
         </ListGroup>
       </Row>
+      <SelectTreasureInfo mission_title="みっしょん" duration="20分ぐらい？"></SelectTreasureInfo>
     </Container>
   );
 };
