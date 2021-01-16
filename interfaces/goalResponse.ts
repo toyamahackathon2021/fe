@@ -1,41 +1,13 @@
 export interface Trigger {
   type: string;
-  dist: string;
+  dist: number;
 }
 
-export interface Hint1 {
+export interface Hint {
   name: string;
   trigger: Trigger;
   contents: string;
-}
-
-export interface Trigger2 {
-  type: string;
-  dist: string;
-}
-
-export interface Hint2 {
-  name: string;
-  trigger: Trigger2;
-  contents: string;
-}
-
-export interface Trigger3 {
-  type: string;
-  dist: string;
-}
-
-export interface Hint3 {
-  name: string;
-  trigger: Trigger3;
-  contents: string;
   image_url: string;
-}
-
-export interface Hints {
-  hint1: Hint1;
-  hint2: Hint2;
-  hint3: Hint3;
 }
 
 export interface Arrived {
@@ -44,17 +16,19 @@ export interface Arrived {
   coupon_url: string;
 }
 
-export interface Data {
-  name: string;
-  name_eng: string;
+export interface Goal {
+  mission_title: string;
+  location_name: string;
   display_condition: string;
+  duration: string;
+  duration_info: string;
   lat: number;
   lng: number;
-  hints: Hints;
+  hints: Hint[];
   arrived: Arrived;
 }
 
 export interface GoalResponse {
   id: string;
-  data: Data;
+  data: Goal;
 }

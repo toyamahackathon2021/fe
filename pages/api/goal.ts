@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import goal_1 from "./goal_1.json";
-// import goal_2 from "./goal_2.json";
+import goal_2 from "./goal_2.json";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const query = req.query;
@@ -13,11 +13,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     },
     {
       id: "2",
-      // data: goal_2,
-    },
-    {
-      id: "3",
-      // data: goal_3,
+      data: goal_2,
     },
   ];
 

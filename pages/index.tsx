@@ -13,27 +13,13 @@ const IndexPage = () => {
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
 
-  // const questList = [
-  //   {
-  //     name: "富山城",
-  //     id: 1,
-  //   },
-  //   {
-  //     name: "ブリ",
-  //     id: 2,
-  //   },
-  //   {
-  //     name: "スタバ",
-  //     id: 3,
-  //   },
-  // ];
-
-  const questList: { id: string; name: string }[] = data.map((d: any) => {
+  const questList = data.map((d: GoalResponse) => {
     return {
       id: d.id,
-      name: d.data ? d.data.name : "",
+      name: d.data ? d.data.mission_title : "",
     };
   });
+  console.log(questList);
 
   return (
     <Container>

@@ -1,40 +1,39 @@
 {
     "name": "富山城",
+    "mission_title": "富山城を目指せ",
     "name_eng": "toyama castle",
     "display_condition": "crowd",
-    "duration": "10-20分程度", 
+    "duration": "10-20分程度",
     "duration_info": "所要見込み時間はヒント2が表示できるようになってからの見込み時間です。",
-    "lat": "36.68926910355875",
-    "lng": "137.2137216967143",
-    "hints": {
-        "hint1": {
+    "lat": 36.68926910355875,
+    "lng": 137.2137216967143,
+    "hints": [
+        {
             "name": "ヒント1",
             "trigger": {
                 "type": "initial",
-                "dist": "0" 
+                "dist": 0
             },
             "contents": "富山のまちなかを目指そう"
-            
         },
-        "hint2": {
+        {
             "name": "ヒント2",
             "trigger": {
                 "type": "geofence",
-                "dist": "500" 
+                "dist": 500
             },
             "contents": "グランドプラザの広場を目指せ！"
-            
         },
-        "hint3": {
+        {
             "name": "ヒント3",
             "trigger": {
                 "type": "geofence",
-                "dist": "100" 
+                "dist": 100
             },
             "contents": "写真のビジョンを探せ。写真のビジョンが見つかったらそれを写真で送信してね",
             "image_url": "https://user-images.githubusercontent.com/4006425/104808528-3a01cf80-582a-11eb-9c2e-6b7a6e5e327d.png"
         }
-    },
+    ],
     "arrived": {
         "title": "おめでとう！！",
         "contents": "おめでとう!<br/>グランドプラザにたどり着いたね。この施設は2007年にオープンしたよ。<br/>写真を撮ってもらった大型ビジョンの大きさはなんと277インチ!<br/>また、今いるこの広場には下が倉庫になっているせり上がり式の舞台があるよ。<br/>イベントのときにせり上がったりするので、機会があったら見てみてね。",
