@@ -2,7 +2,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useGeolocation } from "react-use";
 import { Button, Container, ListGroup, Navbar, Row } from "react-bootstrap";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { distm } from "../../services/geo";
 import useSWR from "swr";
 import { fetcher } from "../../services/fetcher";
