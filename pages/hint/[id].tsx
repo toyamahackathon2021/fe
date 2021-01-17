@@ -19,6 +19,9 @@ import { reverse } from "lodash";
 import CenterModal from "../../components/Modal";
 
 const style = `
+* {
+  text-align：center;
+}
 .container {
 //   background-color: #fff;
 //   padding: 10px;
@@ -28,6 +31,7 @@ padding-top: 50px;
   height: 100vh;
   padding: 20px;
   background-image: url("/bg.png");
+  background-size: cover;
   background-color: rgba(0, 0, 0, 0.2);
  }
  .title {
@@ -71,22 +75,15 @@ padding-top: 50px;
    margin-left: 10px;
    color: #fff;
    border: none;
-   font-size: 12px;
-   text-align: left;white-space: nowrap;
- }
- .hintItemDistance {
-   color: #fff;
-   border: none;
-   font-size: 12px;
    text-align: left;
+   white-space: nowrap;
  }
-
- .hintItem-open {
-   .hintItemText {
-     display: none;
-   }
-
-   .
+ .center {
+   text-align: center;
+ }
+ .list-group {
+  display: flex;
+  align-items: center;
  }
 `;
 
@@ -155,8 +152,13 @@ const Hint = () => {
                       router.push(`/send/${id}`);
                     }}
                   >
-                    宝を掘り出す！
+                    宝箱を開ける!
                   </Button>
+                </ListGroup.Item>
+                <ListGroup.Item className="hintItem hintItemText">
+                  宝まで
+                  <br />
+                  {10}m<br/>以内で開放
                 </ListGroup.Item>
               </ListGroup>
             </Row>
@@ -199,7 +201,7 @@ const Hint = () => {
                       ヒント{length - idx}を見る
                     </Button>
                   </ListGroup.Item>
-                  <ListGroup.Item className="hintItem">
+                  <ListGroup.Item className="hintItem　hintItemText">
                     宝まで
                     <br />
                     {h.trigger.dist}m<br />
