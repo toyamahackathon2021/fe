@@ -28,7 +28,7 @@ const style = `
 padding-top: 50px;
  }
  .wrapper {
-  height: 100vh;
+  // height: 100vh;
   padding: 20px;
   background-image: url("/bg.png");
   background-color: rgba(0, 0, 0, 0.2);
@@ -72,7 +72,9 @@ padding-top: 50px;
 `;
 
 const inGeoFence = (dist: number | null, geoFence: number) => {
-  return dist && dist <= geoFence ? true : false;
+  const result = dist != null && dist >= 0 && dist <= geoFence ? true : false;
+  console.log(result);
+  return result;
 };
 
 const Hint = () => {
@@ -84,12 +86,14 @@ const Hint = () => {
   const modalId = useRef<number>();
   const modalTitle = useRef<string>("");
   const modalContent = useRef<string>("");
+  const imageSrc = useRef<string>("");
   const showModal = useCallback(
-    (id: number, title: string, content: string) => {
+    (id: number, title: string, content: string, image: string | undefined) => {
       setModalShow(true);
       modalId.current = id;
       modalTitle.current = title;
       modalContent.current = content;
+      imageSrc.current = image ?? "";
     },
     [setModalShow]
   );
@@ -105,6 +109,7 @@ const Hint = () => {
   const questData = quest.data;
   const goalPoint = { lat: questData.lat, lng: questData.lng };
   const dist = distm(currentPoint, goalPoint);
+  console.log(dist);
 
   return (
     <>
@@ -133,7 +138,9 @@ const Hint = () => {
                     variant={inGeoFence(dist, 10) ? "warning" : "secondary"}
                     active={inGeoFence(dist, 10)}
                     onClick={() => {
-                      router.push(`/send/${id}`);
+                      if (inGeoFence(dist, 10)) {
+                        router.push(`/send/${id}`);
+                      }
                     }}
                   >
                     宝を掘り出す！
@@ -142,7 +149,8 @@ const Hint = () => {
                 <ListGroup.Item className="hintItem">
                   宝まで
                   <br />
-                  {10}m<br/>以内で開放
+                  {10}m<br />
+                  以内で開放
                 </ListGroup.Item>
               </ListGroup>
             </Row>
@@ -158,7 +166,9 @@ const Hint = () => {
                       variant={"warning"}
                       size="lg"
                       block
-                      onClick={() => showModal(1, h.name, h.contents)}
+                      onClick={() =>
+                        showModal(1, h.name, h.contents, h.image_url)
+                      }
                     >
                       ヒント1を見る
                     </Button>
@@ -171,16 +181,16 @@ const Hint = () => {
 
             return (
               <Row className="hintListWrapper">
-                <ListGroup
-                  horizontal={true}
-                  className="my-2"
-                  key={idx}
-                >
+                <ListGroup horizontal={true} className="my-2" key={idx}>
                   <ListGroup.Item className="hintItem">
                     <Button
                       variant={isInGeoFence ? "warning" : "secondary"}
                       active={isInGeoFence}
-                      onClick={() => showModal(1, h.name, h.contents)}
+                      onClick={() => {
+                        if (isInGeoFence) {
+                          showModal(1, h.name, h.contents, h.image_url);
+                        }
+                      }}
                     >
                       ヒント{length - idx}を見る
                     </Button>
@@ -201,6 +211,7 @@ const Hint = () => {
             // id={modalId.current ?? ""}
             title={modalTitle.current ?? ""}
             content={modalContent.current ?? ""}
+            imageSrc={imageSrc.current ?? ""}
           ></CenterModal>
         </Container>
       </div>
