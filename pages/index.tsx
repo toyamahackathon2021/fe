@@ -4,7 +4,9 @@ import { Container, Row, ListGroup, Button } from "react-bootstrap";
 import useSWR from "swr";
 import { GoalResponse } from "../interfaces/goalResponse";
 import { fetcher } from "../services/fetcher";
-import SelectTreasureInfo from "../components/test";
+import SelectTreasureInfo from "../components/SelectTreasureInfo";
+import path from "path";
+
 type missionType = {
   mission_title: string;
   duration: string;
@@ -12,7 +14,10 @@ type missionType = {
 
 const IndexPage = () => {
   const { data, error } = useSWR<GoalResponse[]>("/api/goal", fetcher);
+  const { crowdData, dataError } = useSWR("/api/crowd", fetcher);
+
   console.log(data);
+  console.log(crowdData);
 
   const [mission, setMission] = useState<missionType>({
     mission_title: "",
