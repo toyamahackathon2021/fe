@@ -18,7 +18,10 @@ const style = `
  .title {
    font-size: 20px;
    font-weight: bold;
-  }
+ }
+ .subTitle {
+    font-size: 1.4rem;
+ }
  .center {
    text-align: center;
  }
@@ -52,9 +55,10 @@ const Good = () => {
               className="thumnail"
             />
           </Row>
+          <br/>
           <Row>
             <Col md="auto" className="center">
-              <h4 className="title">富山城にたどり着いたね！</h4>
+              <h4 className="subTitle">富山城にたどり着いたね！</h4>
             </Col>
           </Row>
           <Row>
