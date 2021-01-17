@@ -53,8 +53,14 @@ const style = `
   top: 50vw;
   left: 40vw;
  }
-  .missionTrigger {
-  }
+ .missionTrigger {
+   width: 80px;
+   height: 80px;
+ }
+ .missionTrigger:hover {
+   border: 4px solid red;
+   border-radius: 40px;
+ }
 `
 
 const IndexPage = () => {
