@@ -22,6 +22,7 @@ const style = `
  }
  .title {
   font-size: 20px;
+  font-weight: bold;
  }
 `;
 
@@ -59,6 +60,7 @@ const Send = () => {
       <style>{style}</style>
       <div className="wrapper">
         <Container>
+          <br/>
           <Row>
             <Col md="auto" className="center">
               <h1 className="title">
@@ -89,19 +91,23 @@ const Send = () => {
           ) : (
             <>
               <Row>
-                <Button variant="warning" onClick={capture}>
-                  写真を送信する
-                </Button>
+                <Col md="auto" className="center">
+                  <Button variant="warning" onClick={capture}>
+                    写真を送信する
+                  </Button>
+                </Col>
               </Row>
               <Row>
-                <Webcam
-                  audio={false}
-                  height={400}
-                  ref={webcamRef}
-                  screenshotFormat="image/jpeg"
-                  width={400}
-                  videoConstraints={videoConstraints}
-                />
+                <Col md="auto" className="center">
+                  <Webcam
+                    audio={false}
+                    height={200}
+                    ref={webcamRef}
+                    screenshotFormat="image/jpeg"
+                    width={300}
+                    videoConstraints={videoConstraints}
+                  />
+                </Col>
               </Row>
             </>
           )}
@@ -119,7 +125,7 @@ const Send = () => {
           <Row>
             <Col md="auto" className="center">
               <Button
-                variant="outline-primary"
+                variant="link"
                 onClick={() => {
                   router.back();
                 }}

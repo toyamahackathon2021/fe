@@ -31,6 +31,7 @@ padding-top: 50px;
   // height: 100vh;
   padding: 20px;
   background-image: url("/bg.png");
+  background-size: cover;
   background-color: rgba(0, 0, 0, 0.2);
  }
  .title {
@@ -40,6 +41,7 @@ padding-top: 50px;
   text-align: left;
   background-color: #291F16;
   color: #fff;
+  border-bottom: 1px solid #ffffff;
  }
  .navText {
    font-size: 1.4rem;
@@ -68,6 +70,12 @@ padding-top: 50px;
   background-color: #291F16;
   color: #fff;
   border: none;
+ }
+ .hintItemText {
+  color: #fff;
+  border: none;
+  text-align: left;
+  white-space: nowrap;
  }
 `;
 
@@ -143,10 +151,10 @@ const Hint = () => {
                       }
                     }}
                   >
-                    宝を掘り出す！
+                    宝箱を開ける!
                   </Button>
                 </ListGroup.Item>
-                <ListGroup.Item className="hintItem">
+                <ListGroup.Item className="hintItem hintItemText">
                   宝まで
                   <br />
                   {10}m<br />
@@ -195,7 +203,7 @@ const Hint = () => {
                       ヒント{length - idx}を見る
                     </Button>
                   </ListGroup.Item>
-                  <ListGroup.Item className="hintItem">
+                  <ListGroup.Item className="hintItem hintItemText">
                     宝まで
                     <br />
                     {h.trigger.dist}m<br />

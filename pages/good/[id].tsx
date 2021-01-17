@@ -17,6 +17,10 @@ const style = `
  }
  .title {
    font-size: 20px;
+   font-weight: bold;
+ }
+ .subTitle {
+    font-size: 1.4rem;
  }
  .center {
    text-align: center;
@@ -36,6 +40,7 @@ const Good = () => {
       <style>{style}</style>
       <div className="wrapper">
         <Container>
+          <br/>
           <Row className="">
             <Col md="auto" className="center">
               <h1 className="title">おめでとう！</h1>
@@ -50,9 +55,10 @@ const Good = () => {
               className="thumnail"
             />
           </Row>
+          <br/>
           <Row>
             <Col md="auto" className="center">
-              <h4 className="title">富山城にたどり着いたね！</h4>
+              <h4 className="subTitle">富山城にたどり着いたね！</h4>
             </Col>
           </Row>
           <Row>
@@ -73,7 +79,7 @@ const Good = () => {
             </Col>
           </Row>
           <Button
-            variant="outline-primary"
+            variant="link"
             onClick={() => {
               router.push("/");
             }}
