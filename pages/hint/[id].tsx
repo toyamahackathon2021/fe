@@ -86,12 +86,14 @@ const Hint = () => {
   const modalId = useRef<number>();
   const modalTitle = useRef<string>("");
   const modalContent = useRef<string>("");
+  const imageSrc = useRef<string>("");
   const showModal = useCallback(
-    (id: number, title: string, content: string) => {
+    (id: number, title: string, content: string, image: string | undefined) => {
       setModalShow(true);
       modalId.current = id;
       modalTitle.current = title;
       modalContent.current = content;
+      imageSrc.current = image ?? "";
     },
     [setModalShow]
   );
@@ -147,7 +149,8 @@ const Hint = () => {
                 <ListGroup.Item className="hintItem">
                   宝まで
                   <br />
-                  {10}m<br/>以内で開放
+                  {10}m<br />
+                  以内で開放
                 </ListGroup.Item>
               </ListGroup>
             </Row>
@@ -163,7 +166,9 @@ const Hint = () => {
                       variant={"warning"}
                       size="lg"
                       block
-                      onClick={() => showModal(1, h.name, h.contents)}
+                      onClick={() =>
+                        showModal(1, h.name, h.contents, h.image_url)
+                      }
                     >
                       ヒント1を見る
                     </Button>
@@ -176,18 +181,14 @@ const Hint = () => {
 
             return (
               <Row className="hintListWrapper">
-                <ListGroup
-                  horizontal={true}
-                  className="my-2"
-                  key={idx}
-                >
+                <ListGroup horizontal={true} className="my-2" key={idx}>
                   <ListGroup.Item className="hintItem">
                     <Button
                       variant={isInGeoFence ? "warning" : "secondary"}
                       active={isInGeoFence}
                       onClick={() => {
                         if (isInGeoFence) {
-                          showModal(1, h.name, h.contents);
+                          showModal(1, h.name, h.contents, h.image_url);
                         }
                       }}
                     >
@@ -210,6 +211,7 @@ const Hint = () => {
             // id={modalId.current ?? ""}
             title={modalTitle.current ?? ""}
             content={modalContent.current ?? ""}
+            imageSrc={imageSrc.current ?? ""}
           ></CenterModal>
         </Container>
       </div>

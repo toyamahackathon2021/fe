@@ -7,7 +7,7 @@ export interface Hint {
   name: string;
   trigger: Trigger;
   contents: string;
-  image_url: string;
+  image_url?: string;
 }
 
 export interface Arrived {
