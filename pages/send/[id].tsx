@@ -23,7 +23,7 @@ const style = `
  .title {
   font-size: 20px;
  }
-`
+`;
 
 const videoConstraints = {
   width: 1280,
@@ -58,68 +58,79 @@ const Send = () => {
     <>
       <style>{style}</style>
       <div className="wrapper">
-    <Container>
-      <Row>
-        <Col md="auto" className="center">
-          <h1 className="title">写真を送信して<br/>宝箱を開けよう！</h1>
-        </Col>
-      </Row>
-      <Row>
-        <Col md="auto" className="center">
-          <Image
-            width={90}
-            height={90}
-            alt="takarabako"
-            src="/kaizoku_takarabako.png"
-          />
-        </Col>
-      </Row>
-      {!cameraFlag ? (
-        <Row>
-          <Col md="auto" className="center">
-          <Button variant="warning" onClick={() => setCameraFlag(true)}>
-            写真を撮る
-          </Button>
-          </Col>
-        </Row>
-      ) : (
-        <>
+        <Container>
           <Row>
-            <Button variant="warning" onClick={capture}>
-              写真を送信する
+            <Col md="auto" className="center">
+              <h1 className="title">
+                写真を送信して
+                <br />
+                宝箱を開けよう！
+              </h1>
+            </Col>
+          </Row>
+          <Row>
+            <Col md="auto" className="center">
+              <Image
+                width={90}
+                height={90}
+                alt="takarabako"
+                src="/kaizoku_takarabako.png"
+              />
+            </Col>
+          </Row>
+          {!cameraFlag ? (
+            <Row>
+              <Col md="auto" className="center">
+                <Button variant="warning" onClick={() => setCameraFlag(true)}>
+                  写真を撮る
+                </Button>
+              </Col>
+            </Row>
+          ) : (
+            <>
+              <Row>
+                <Button variant="warning" onClick={capture}>
+                  写真を送信する
+                </Button>
+              </Row>
+              <Row>
+                <Webcam
+                  audio={false}
+                  height={400}
+                  ref={webcamRef}
+                  screenshotFormat="image/jpeg"
+                  width={400}
+                  videoConstraints={videoConstraints}
+                />
+              </Row>
+            </>
+          )}
+          {data && (
+            <Button
+              variant="primary"
+              onClick={() => {
+                router.push(`/good/${id}`);
+              }}
+            >
+              正解に進む
             </Button>
-          </Row>
+          )}
+          {/* {data && data.predictions.map((p: any) => <p>P:{p.probability}</p>)} */}
+          <Row>{data && JSON.stringify(data)}</Row>
+          <br />
           <Row>
-            <Webcam
-              audio={false}
-              height={400}
-              ref={webcamRef}
-              screenshotFormat="image/jpeg"
-              width={400}
-              videoConstraints={videoConstraints}
-            />
+            <Col md="auto" className="center">
+              <Button
+                variant="outline-primary"
+                onClick={() => {
+                  router.back();
+                }}
+              >
+                戻る
+              </Button>
+            </Col>
           </Row>
-        </>
-      )}
-      {data && (
-        <Button
-          variant="primary"
-          onClick={() => {
-            router.push(`/good/${id}`);
-          }}
-        >
-          正解に進む
-        </Button>
-      )}
-      {/* {data && data.predictions.map((p: any) => <p>P:{p.probability}</p>)} */}
-      <Row>{data && JSON.stringify(data)}</Row>
-      <br/>
-      <Row>
-        <Col md="auto" className="center">
-          <Button variant="outline-primary">戻る</Button>
-        </Col>
-      </Row>
-    </Container>
+        </Container>
       </div>
     </>
   );

@@ -69,6 +69,11 @@ padding-top: 50px;
   border: none;
  }
 `;
+
+const inGeoFence = (dist: number | null, geoFence: number) => {
+  return dist && dist <= geoFence ? true : false;
+};
+
 const Hint = () => {
   const state = useGeolocation();
   const router = useRouter();
@@ -110,6 +115,28 @@ const Hint = () => {
             <br />
             {questData.mission_title}
           </Navbar>
+          {true && (
+            <Row>
+              <ListGroup horizontal={true} className="my-2 hintListWrapper">
+                <ListGroup.Item className="hintItem">
+                  <Button
+                    variant={inGeoFence(dist, 10) ? "warning" : "secondary"}
+                    active={inGeoFence(dist, 10)}
+                    onClick={() => {
+                      router.push(`/send/${id}`);
+                    }}
+                  >
+                    宝を掘り起こす！
+                  </Button>
+                </ListGroup.Item>
+                <ListGroup.Item className="hintItem">
+                  宝まで
+                  <br />
+                  {10}m 以内で開放
+                </ListGroup.Item>
+              </ListGroup>
+            </Row>
+          )}
           {reverse(questData.hints).map((h, idx) => {
             const length = questData.hints.length;
 
@@ -130,7 +157,7 @@ const Hint = () => {
               );
             }
 
-            const isInGeoFence = dist && dist <= h.trigger.dist ? true : false;
+            const isInGeoFence = inGeoFence(dist, h.trigger.dist);
 
             return (
               <Row>
