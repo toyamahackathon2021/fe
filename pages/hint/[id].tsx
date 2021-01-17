@@ -28,7 +28,7 @@ const style = `
 padding-top: 50px;
  }
  .wrapper {
-  height: 100vh;
+  // height: 100vh;
   padding: 20px;
   background-image: url("/bg.png");
   background-color: rgba(0, 0, 0, 0.2);
