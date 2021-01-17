@@ -1,10 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useCallback, useState } from "react";
-import { Container, Row, Button, Image } from "react-bootstrap";
+import React, { useCallback, useState } from "react";
+import { Container, Row, Button, Image, Modal } from "react-bootstrap";
 import useSWR from "swr";
 import { GoalResponse } from "../interfaces/goalResponse";
 import { fetcher } from "../services/fetcher";
 import SelectTreasureInfo from "../components/test";
+import UAParser from "ua-parser-js";
+import CenterModal from "../components/Modal";
 type missionType = {
   mission_title: string;
   duration: string;
@@ -64,7 +66,15 @@ const style = `
 `;
 
 const IndexPage = () => {
-  const { data, error } = useSWR<GoalResponse[]>("/api/goal", fetcher);
+  const parser = new UAParser();
+  const device = parser.getDevice();
+  console.log(device);
+  const isSmartPhone = device.type === "mobile";
+
+  const { data, error } = useSWR<GoalResponse[]>(
+    isSmartPhone ? "/api/goal" : null,
+    fetcher
+  );
   console.log(data);
 
   const [mission, setMission] = useState<missionType>({
@@ -81,6 +91,26 @@ const IndexPage = () => {
     },
     [setMission]
   );
+
+  if (!isSmartPhone) {
+    return (
+      <Modal
+        show={true}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">お願い</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            富山トレジャーマップはスマートフォンでのみご利用いただけます。ぜひ、お持ちのスマートフォンで遊んでください！
+          </p>
+        </Modal.Body>
+      </Modal>
+    );
+  }
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;

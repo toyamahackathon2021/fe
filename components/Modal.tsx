@@ -3,7 +3,7 @@ import { Button, Modal, Image } from "react-bootstrap";
 
 interface Props {
   show: boolean;
-  onHide: MouseEventHandler<any>;
+  onHide?: MouseEventHandler<any>;
   // id: number;
   title: string;
   content: string;
@@ -37,7 +37,10 @@ const CenterModal: React.FC<Props> = (props) => {
         centered
       >
         <Modal.Header>
-          <Modal.Title id="contained-modal-title-vcenter" className="modalTitle">
+          <Modal.Title
+            id="contained-modal-title-vcenter"
+            className="modalTitle"
+          >
             {props.title}
           </Modal.Title>
         </Modal.Header>
@@ -48,7 +51,9 @@ const CenterModal: React.FC<Props> = (props) => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="link" onClick={props.onHide}>戻る</Button>
+          <Button variant="link" onClick={props.onHide}>
+            戻る
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

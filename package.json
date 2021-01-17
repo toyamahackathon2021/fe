@@ -17,7 +17,8 @@
     "react-dom": "^16.12.0",
     "react-use": "^15.3.8",
     "react-webcam": "^5.2.2",
-    "swr": "^0.4.0"
+    "swr": "^0.4.0",
+    "ua-parser-js": "^0.7.23"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.167",
@@ -26,6 +27,7 @@
     "@types/react": "^16.9.16",
     "@types/react-bootstrap": "^0.32.25",
     "@types/react-dom": "^16.9.4",
+    "@types/ua-parser-js": "^0.7.35",
     "typescript": "4.0"
   },
   "license": "MIT"
