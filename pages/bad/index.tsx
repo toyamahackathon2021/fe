@@ -17,6 +17,7 @@ const style = `
  }
  .title {
   font-size: 20px;
+  font-weight: bold;
  }
 `
 
@@ -26,6 +27,7 @@ const Bad = () => {
       <style>{style}</style>
       <div className="wrapper">
       <Container>
+        <br/>
         <Row>
           <Col md="auto" className="center">
             <h1 className="title">残念！</h1>
@@ -52,7 +54,7 @@ const Bad = () => {
         <br/>
         <Row>
           <Col md="auto" className="center">
-            <Button variant="outline-primary">戻る</Button>
+            <Button variant="link">戻る</Button>
           </Col>
         </Row>
       </Container>
