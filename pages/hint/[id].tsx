@@ -19,9 +19,6 @@ import { reverse } from "lodash";
 import CenterModal from "../../components/Modal";
 
 const style = `
-* {
-  text-align: center;
-}
 .container {
 //   background-color: #fff;
 //   padding: 10px;
@@ -40,6 +37,7 @@ padding-top: 50px;
   text-align: left;
   background-color: #291F16;
   color: #fff;
+  border-bottom: 1px solid #ffffff;
  }
  .navText {
    font-size: 1.4rem;
@@ -68,6 +66,27 @@ padding-top: 50px;
   background-color: #291F16;
   color: #fff;
   border: none;
+ }
+ .hintItemText {
+   margin-left: 10px;
+   color: #fff;
+   border: none;
+   font-size: 12px;
+   text-align: left;white-space: nowrap;
+ }
+ .hintItemDistance {
+   color: #fff;
+   border: none;
+   font-size: 12px;
+   text-align: left;
+ }
+
+ .hintItem-open {
+   .hintItemText {
+     display: none;
+   }
+
+   .
  }
 `;
 
@@ -138,11 +157,6 @@ const Hint = () => {
                   >
                     宝を掘り出す！
                   </Button>
-                </ListGroup.Item>
-                <ListGroup.Item className="hintItem">
-                  宝まで
-                  <br />
-                  {10}m<br/>以内で開放
                 </ListGroup.Item>
               </ListGroup>
             </Row>
