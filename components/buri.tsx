@@ -1,8 +1,5 @@
 import * as React from "react";
-import { Button, Container, Col, Row, Image } from "react-bootstrap";
-interface Props {
-}
-interface State {}
+interface Props {}
 
 const style = `
 .poyooon {
@@ -68,33 +65,64 @@ const style = `
    height: 130px;
    margin-bottom: -15px;
 }
-`
+`;
+
+interface Props {
+  buruburu?: boolean;
+  poyooon?: boolean;
+}
+
+const getClasses = (buruburu: boolean, poyooon: boolean): string[] => {
+  const c = ["buri", "sashimi"];
+  if (buruburu) {
+    c.push("buruburu");
+  } else if (poyooon) {
+    c.push("poyooon");
+  }
+  return c;
+};
 
 const Buri: React.FC<Props> = (props) => {
-  const buri = document.getElementById('buri');
-  const buriContent = document.getElementById('buriContent');
-  const buriGaming = document.getElementById('buriGaming');
-  const buriBuruburu = document.getElementById('buriBuruburu');
+  // const buri = document.getElementById('buri');
+  const buri = React.useRef(null);
+  // const buriContent = document.getElementById("buriContent");
+  // const buriGaming = document.getElementById("buriGaming");
+  // const buriBuruburu = document.getElementById("buriBuruburu");
 
   // click gameing toggle
-  if(buriGaming){
-    buriGaming.addEventListener('click', event => {
-      buriContent.classList.toggle('poyooon');
-    }, false);
-  }
+  // if (buriGaming) {
+  //   buriGaming.addEventListener(
+  //     "click",
+  //     (event) => {
+  //       buriContent.classList.toggle("poyooon");
+  //     },
+  //     false
+  //   );
+  // }
 
-  // buri buruburu
-  if(buriBuruburu){
-    buriBuruburu.addEventListener('click', event => {
-      buriContent.classList.toggle("buruburu")
-    }, false);
-  }
+  // // buri buruburu
+  // if (buriBuruburu) {
+  //   buriBuruburu.addEventListener(
+  //     "click",
+  //     (event) => {
+  //       buriContent.classList.toggle("buruburu");
+  //     },
+  //     false
+  //   );
+  // }
 
   return (
     <>
       <style>{style}</style>
-      <div id="buri" className="buriWrapper">
-        <div id="buriContent" className="buri sashimi" />
+      <div id="buri" className="buriWrapper" ref={buri}>
+        <div
+          id="buriContent"
+          // className={"buri sashimi poyooon"}
+          className={getClasses(
+            props.buruburu ?? false,
+            props.poyooon ?? false
+          ).join(" ")}
+        />
       </div>
     </>
   );
