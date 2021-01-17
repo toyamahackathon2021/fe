@@ -17,6 +17,7 @@ import { GoalResponse } from "../../interfaces/goalResponse";
 import React, { useCallback, useRef } from "react";
 import { reverse } from "lodash";
 import CenterModal from "../../components/Modal";
+import Buri from "../../components/buri";
 
 const style = `
 * {
@@ -171,19 +172,24 @@ const Hint = () => {
 
             if (idx === length - 1) {
               return (
-                <Row className="hintWrapper">
-                  <Col md="auto" className="center">
-                    <Button
-                      variant={"warning"}
-                      size="lg"
-                      block
-                      onClick={() =>
-                        showModal(1, h.name, h.contents, h.image_url)
-                      }
-                    >
-                      ヒント1を見る
-                    </Button>
-                  </Col>
+                <Row className="">
+                  <ListGroup horizontal={true} className="my-2" key={idx}>
+                    <ListGroup.Item className="hintItem">
+                      <Col md="1" className="center">
+                        <Button
+                          variant={"warning"}
+                          size="lg"
+                          block
+                          onClick={() =>
+                            showModal(1, h.name, h.contents, h.image_url)
+                          }
+                        >
+                          ヒント1を見る
+                        </Button>
+                      </Col>
+                    </ListGroup.Item>
+                    <ListGroup.Item className="hintItem hintItemText"></ListGroup.Item>
+                  </ListGroup>
                 </Row>
               );
             }
@@ -226,6 +232,7 @@ const Hint = () => {
           ></CenterModal>
         </Container>
       </div>
+      <Buri buruburu={true} poyooon={true}></Buri>
     </>
   );
 };
