@@ -71,7 +71,9 @@ padding-top: 50px;
 `;
 
 const inGeoFence = (dist: number | null, geoFence: number) => {
-  return dist && dist <= geoFence ? true : false;
+  const result = dist != null && dist >= 0 && dist <= geoFence ? true : false;
+  console.log(result);
+  return result;
 };
 
 const Hint = () => {
@@ -104,6 +106,7 @@ const Hint = () => {
   const questData = quest.data;
   const goalPoint = { lat: questData.lat, lng: questData.lng };
   const dist = distm(currentPoint, goalPoint);
+  console.log(dist);
 
   return (
     <>
@@ -123,7 +126,9 @@ const Hint = () => {
                     variant={inGeoFence(dist, 10) ? "warning" : "secondary"}
                     active={inGeoFence(dist, 10)}
                     onClick={() => {
-                      router.push(`/send/${id}`);
+                      if (inGeoFence(dist, 10)) {
+                        router.push(`/send/${id}`);
+                      }
                     }}
                   >
                     宝を掘り起こす！
@@ -170,7 +175,11 @@ const Hint = () => {
                     <Button
                       variant={isInGeoFence ? "warning" : "secondary"}
                       active={isInGeoFence}
-                      onClick={() => showModal(1, h.name, h.contents)}
+                      onClick={() => {
+                        if (isInGeoFence) {
+                          showModal(1, h.name, h.contents);
+                        }
+                      }}
                     >
                       ヒント{length - idx}を見る
                     </Button>
