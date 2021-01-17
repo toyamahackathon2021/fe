@@ -12,10 +12,6 @@ const styleGenerator = (mission_title: string): React.CSSProperties => ({
   display: mission_title ? "initial" : "initial",
   border: "none",
   padding: "0 16px",
-  // color: "#fff",
-  // background: "#000",
-  // position: "absolute",
-  // bottom: 0,
 });
 
 const style = `
@@ -36,6 +32,7 @@ const style = `
  .alert {
    background-color: #fff;
    color: #291F16;
+   line-height: 1.4;
   }
 `
 
@@ -78,6 +75,8 @@ const SelectTreasureInfo: React.FC<Props> = (props) => {
             }}
           >
             宝探しを始める
+            {/* if (alert) */}
+            {/* それでも宝探しを始める */}
           </Button>
         </Row>
         <br/>
