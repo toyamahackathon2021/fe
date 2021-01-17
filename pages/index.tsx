@@ -11,6 +11,10 @@ type missionType = {
   duration: string;
 };
 
+type crowd_data = {
+  level: number|null;
+};
+
 const style = `
 * {
   text-align: center;
@@ -99,25 +103,6 @@ const IndexPage = () => {
 
   console.log(questList);
 
-  const formattedDateForCSVField = (dt) => {
-    const y = dt.getFullYear();
-    const m = ('00' + (dt.getMonth()+1)).slice(-2);
-    const d = ('00' + dt.getDate()).slice(-2);
-    const h = ('00' + dt.getHours()).slice(-2);
-    const mm = (Math.floor(dt.getMinutes() / 10) * 10);
-
-    return (y + '-' + m + '-' + d + " " + h + mm);
-  }
-  // 雑に書いておく
-  const estimateCrowdLevel = () => {
-    const formattedNowDate = formattedDateForCSVField(new Date());
-
-    console.log("aaaaaaa----", formattedDateForCSVField)
-    return crowdDate.data.filter((row) => row.datetime === formattedNowDate);
-    // const crowdLevelByTime = crowdData.data.datetime[]
-
-  }
-
   return (
     <>
       <style>{style}</style>
@@ -157,6 +142,7 @@ const IndexPage = () => {
             </div>
           </Row>
           <SelectTreasureInfo
+            crowd_data={crowdData.data}
             mission_title={mission.mission_title}
             duration={mission.duration}
             id={missionId}

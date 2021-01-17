@@ -5,6 +5,7 @@ interface Props {
   mission_title: string;
   duration: string;
   id: number | null;
+  crowd_data: any | null;
 }
 interface State {}
 
