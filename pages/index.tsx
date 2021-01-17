@@ -10,6 +10,7 @@ import SelectTreasureInfo from "../components/test"
 const IndexPage = () => {
   const { data, error } = useSWR<GoalResponse[]>("/api/goal", fetcher);
   console.log(data);
+  const [mission, setMission] = useState({id: 0, mission_title: "", duration: ""});
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
@@ -21,16 +22,10 @@ const IndexPage = () => {
       duration: d.data ? d.data.duration : "",
     };
   });
-  type missionType = {
-    mission_title: string;
-    duration: string;
-  }
-  const [mission, setMission] = useState<missionType>( {mission_title: "", duration: ""});
-
 
   let handleTreasureClick = (treasure) => {
     if(!treasure) return;
-    setMission({mission_title: treasure.name, duration: treasure.duration})
+    setMission({id: treasure.id, mission_title: treasure.name, duration: treasure.duration})
   };
   console.log(questList);
 
@@ -44,14 +39,11 @@ const IndexPage = () => {
           {questList.map((q) => (
             <ListGroup.Item>
               <Button onClick={() => handleTreasureClick(q)} key={q}>{q.name}</Button>
-              {/*
-              <Link href={`/hint/${q.id}`}>{q.name}</Link>
-              */}
             </ListGroup.Item>
           ))}
         </ListGroup>
       </Row>
-      <SelectTreasureInfo mission_title={mission.mission_title} duration={mission.duration}></SelectTreasureInfo>
+      <SelectTreasureInfo id={mission.id} mission_title={mission.mission_title} duration={mission.duration}></SelectTreasureInfo>
     </Container>
   );
 };
