@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useCallback, useState } from "react";
-import { Container, Col, Row, ListGroup, Button, Image } from "react-bootstrap";
+import { Container, Row, Button, Image } from "react-bootstrap";
 import useSWR from "swr";
 import { GoalResponse } from "../interfaces/goalResponse";
 import { fetcher } from "../services/fetcher";
@@ -61,7 +61,7 @@ const style = `
    border: 4px solid red;
    border-radius: 40px;
  }
-`
+`;
 
 const IndexPage = () => {
   const { data, error } = useSWR<GoalResponse[]>("/api/goal", fetcher);
@@ -99,40 +99,46 @@ const IndexPage = () => {
     <>
       <style>{style}</style>
       <div className="wrapper">
-    <Container fluid="lg">
-      <Row className="col-12 justify-content-md-center headerWrapper">
-        <h1 className="title">富山 トレジャーハント</h1>
-        <p className="mission">
-          探しに行く
-          <br/>宝を選んでください
-        </p>
-      </Row>
-      <Row className="col-12 justify-content-md-center">
-        <div className="missionLists">
-          {questList.map((q, id) => (
-            <div className="missionList">
-              <Button  variant="link" className="missionTrigger" onClick={() => handleTreasureClick(q)} key={id}>
-                {/* {q.name} */}
-                <Image
-                  width={45}
-                  height={45}
-                  alt="mission"
-                  src="/kaizoku_takarabako.png"
-                />
-              </Button>
-              {/*
+        <Container fluid="lg">
+          <Row className="col-12 justify-content-md-center headerWrapper">
+            <h1 className="title">富山 トレジャーハント</h1>
+            <p className="mission">
+              探しに行く
+              <br />
+              宝を選んでください
+            </p>
+          </Row>
+          <Row className="col-12 justify-content-md-center">
+            <div className="missionLists">
+              {questList.map((q, id) => (
+                <div className="missionList">
+                  <Button
+                    variant="link"
+                    className="missionTrigger"
+                    onClick={() => handleTreasureClick(q)}
+                    key={id}
+                  >
+                    {/* {q.name} */}
+                    <Image
+                      width={45}
+                      height={45}
+                      alt="mission"
+                      src="/kaizoku_takarabako.png"
+                    />
+                  </Button>
+                  {/*
               <Link href={`/hint/${q.id}`}>{q.name}</Link>
               */}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </Row>
-      <SelectTreasureInfo
-        mission_title={mission.mission_title}
-        duration={mission.duration}
-        id={missionId}
-      ></SelectTreasureInfo>
-    </Container>
+          </Row>
+          <SelectTreasureInfo
+            mission_title={mission.mission_title}
+            duration={mission.duration}
+            id={missionId}
+          ></SelectTreasureInfo>
+        </Container>
       </div>
     </>
   );
