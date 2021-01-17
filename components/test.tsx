@@ -33,6 +33,10 @@ const style = `
  .missionTitle, .missionDuration {
    margin-left: 1em;
  }
+ .alert {
+   background-color: #fff;
+   color: #291F16;
+  }
 `
 
 const SelectTreasureInfo: React.FC<Props> = (props) => {
@@ -46,11 +50,20 @@ const SelectTreasureInfo: React.FC<Props> = (props) => {
       >
         <br/>
         <Row>
+          <p className="alert">
+          ⚠︎ 混雑注意！
+          <br/>
+          現在多くの人が宝箱付近にいます。
+          <br/>
+          安全のため時間を置いてからの参加をおすすめします。
+          </p>
+        </Row>
+        <Row>
           Mission:
           <h4 className="missionTitle justify-content-md-center">
             {props.mission_title}
           </h4>
-          </Row>
+        </Row>
         <Row>
           所要時間:
           <div className="missionDuration justify-content-md-center">{props.duration}</div>
