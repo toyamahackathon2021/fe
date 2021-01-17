@@ -20,7 +20,7 @@ import CenterModal from "../../components/Modal";
 
 const style = `
 * {
-  text-align：center;
+  text-align: center;
 }
 .container {
 //   background-color: #fff;
@@ -77,13 +77,6 @@ padding-top: 50px;
    border: none;
    text-align: left;
    white-space: nowrap;
- }
- .center {
-   text-align: center;
- }
- .list-group {
-  display: flex;
-  align-items: center;
  }
 `;
 
