@@ -1,6 +1,5 @@
 import React, { MouseEventHandler } from "react";
-import Button from "react-bootstrap/esm/Button";
-import Modal from "react-bootstrap/esm/Modal";
+import { Button, Modal } from "react-bootstrap";
 
 interface Props {
   show: boolean;

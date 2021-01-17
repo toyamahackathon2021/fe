@@ -78,6 +78,15 @@ const Hint = () => {
   const modalId = useRef<number>();
   const modalTitle = useRef<string>("");
   const modalContent = useRef<string>("");
+  const showModal = useCallback(
+    (id: number, title: string, content: string) => {
+      setModalShow(true);
+      modalId.current = id;
+      modalTitle.current = title;
+      modalContent.current = content;
+    },
+    [setModalShow]
+  );
   const { latitude, longitude } = state;
   const currentPoint =
     latitude && longitude ? { lat: latitude, lng: longitude } : null;
@@ -90,16 +99,6 @@ const Hint = () => {
   const questData = quest.data;
   const goalPoint = { lat: questData.lat, lng: questData.lng };
   const dist = distm(currentPoint, goalPoint);
-
-  const showModal = useCallback(
-    (id: number, title: string, content: string) => {
-      setModalShow(true);
-      modalId.current = id;
-      modalTitle.current = title;
-      modalContent.current = content;
-    },
-    []
-  );
 
   return (
     <>
@@ -166,42 +165,6 @@ const Hint = () => {
             title={modalTitle.current ?? ""}
             content={modalContent.current ?? ""}
           ></CenterModal>
-
-          {/* {questData.hints.map((h) => (
-        <Row>
-          <h3>{h.name}</h3>
-          <p>トリガー: {h.trigger.dist}</p>
-          <h2>
-            範囲内判定: {dist && dist <= h.trigger.dist ? "範囲内" : "範囲外"}
-          </h2>
-        </Row>
-      ))} */}
-          {/* <Row>
-        <Link href={`/send/${id}`}>
-          <Button variant="primary">
-            <a>写真送信</a>
-          </Button>
-        </Link>
-        <Link href="/good">
-          <Button variant="primary">
-            <a>正解画面遷移</a>
-          </Button>
-        </Link>
-        <Link href="/bad">
-          <Button variant="primary">
-            <a>失敗画面遷移</a>
-          </Button>
-        </Link>
-      </Row>
-      <Row>
-        {currentPoint && (
-          <>
-            <h2>lat: {currentPoint.lat}</h2>
-            <h2>lon: {currentPoint.lng}</h2>
-            <h2>距離: {dist}m</h2>
-          </>
-        )}
-      </Row> */}
         </Container>
       </div>
     </>
