@@ -31,8 +31,9 @@ const style = `
   font-size: 20px;
  }
  .headerWrapper {
-   background-color: #fff;
+   margin: 0 auto;
    padding: 10px;
+   background-color: #fff;
  }
  .mission {
    width: 100%;
