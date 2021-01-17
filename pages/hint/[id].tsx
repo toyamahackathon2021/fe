@@ -80,9 +80,12 @@ padding-top: 50px;
 `;
 
 const inGeoFence = (dist: number | null, geoFence: number) => {
-  const result = dist != null && dist >= 0 && dist <= geoFence ? true : false;
-  console.log(result);
-  return result;
+  console.log(dist);
+  console.log(geoFence);
+  return true;
+  // const result = dist != null && dist >= 0 && dist <= geoFence ? true : false;
+  // console.log(result);
+  // return result;
 };
 
 const Hint = () => {
