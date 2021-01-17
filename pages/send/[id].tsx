@@ -115,8 +115,6 @@ const Send = () => {
               正解に進む
             </Button>
           )}
-          {/* {data && data.predictions.map((p: any) => <p>P:{p.probability}</p>)} */}
-          <Row>{data && JSON.stringify(data)}</Row>
           <br />
           <Row>
             <Col md="auto" className="center">
