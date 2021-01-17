@@ -19,6 +19,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const data = id === undefined ? all : all.filter((d) => d.id === id);
 
+  console.log(data)
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   res.end(JSON.stringify(data));
