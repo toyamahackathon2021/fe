@@ -6,7 +6,6 @@ import { GoalResponse } from "../interfaces/goalResponse";
 import { fetcher } from "../services/fetcher";
 import SelectTreasureInfo from "../components/test";
 import UAParser from "ua-parser-js";
-import CenterModal from "../components/Modal";
 type missionType = {
   mission_title: string;
   duration: string;
