@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useRouter } from "next/router";
 import { Container, Col, Row, Button, Image } from "react-bootstrap";
+import Buri from "../../components/buri";
 
 const style = `
 * {
@@ -87,6 +88,7 @@ const Good = () => {
             戻る
           </Button>
         </Container>
+        <Buri />
       </div>
     </>
   );
