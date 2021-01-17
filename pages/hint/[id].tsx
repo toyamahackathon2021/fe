@@ -4,6 +4,7 @@ import {
   Button,
   Container,
   Col,
+  Image,
   ListGroup,
   Navbar,
   Row,
@@ -49,7 +50,7 @@ padding-top: 50px;
   background-color: #291F16;
  }
  .hintListWrapper {
-  margin: 0 auto 20px;
+  margin-bottom: 20px;
   padding: 20px;
   background-color: #291F16;
   position: relative;
@@ -119,8 +120,17 @@ const Hint = () => {
             {questData.mission_title}
           </Navbar>
           {true && (
-            <Row>
-              <ListGroup horizontal={true} className="my-2 hintListWrapper">
+            <Row className="hintListWrapper">
+              <Col md="auto" className="center">
+                <Image
+                  width={90}
+                  height={90}
+                  alt="takara"
+                  src="/kaizoku_takarabako.png"
+                  className="thumnail"
+                />
+              </Col>
+              <ListGroup horizontal={true} className="my-2">
                 <ListGroup.Item className="hintItem">
                   <Button
                     variant={inGeoFence(dist, 10) ? "warning" : "secondary"}
@@ -131,13 +141,13 @@ const Hint = () => {
                       }
                     }}
                   >
-                    宝を掘り起こす！
+                    宝を掘り出す！
                   </Button>
                 </ListGroup.Item>
                 <ListGroup.Item className="hintItem">
                   宝まで
                   <br />
-                  {10}m 以内で開放
+                  {10}m<br/>以内で開放
                 </ListGroup.Item>
               </ListGroup>
             </Row>
@@ -165,10 +175,10 @@ const Hint = () => {
             const isInGeoFence = inGeoFence(dist, h.trigger.dist);
 
             return (
-              <Row>
+              <Row className="hintListWrapper">
                 <ListGroup
                   horizontal={true}
-                  className="my-2 hintListWrapper"
+                  className="my-2"
                   key={idx}
                 >
                   <ListGroup.Item className="hintItem">
