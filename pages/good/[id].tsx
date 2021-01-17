@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useRouter } from "next/router";
 import { Container, Col, Row, Button, Image } from "react-bootstrap";
-import Buri from "../../components/buri";
+// import Buri from "../../components/buri";
 
 const style = `
 * {
@@ -41,7 +41,7 @@ const Good = () => {
       <style>{style}</style>
       <div className="wrapper">
         <Container>
-          <br/>
+          <br />
           <Row className="">
             <Col md="auto" className="center">
               <h1 className="title">おめでとう！</h1>
@@ -56,7 +56,7 @@ const Good = () => {
               className="thumnail"
             />
           </Row>
-          <br/>
+          <br />
           <Row>
             <Col md="auto" className="center">
               <h4 className="subTitle">富山城にたどり着いたね！</h4>
@@ -88,7 +88,7 @@ const Good = () => {
             戻る
           </Button>
         </Container>
-        <Buri />
+        {/* <Buri /> */}
       </div>
     </>
   );
