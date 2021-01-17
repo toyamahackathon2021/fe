@@ -204,7 +204,7 @@ const Hint = () => {
                       ヒント{length - idx}を見る
                     </Button>
                   </ListGroup.Item>
-                  <ListGroup.Item className="hintItem　hintItemText">
+                  <ListGroup.Item className="hintItem hintItemText">
                     宝まで
                     <br />
                     {h.trigger.dist}m<br />
