@@ -17,7 +17,8 @@ const style = `
  }
  .title {
    font-size: 20px;
- }
+   font-weight: bold;
+  }
  .center {
    text-align: center;
  }
@@ -36,6 +37,7 @@ const Good = () => {
       <style>{style}</style>
       <div className="wrapper">
         <Container>
+          <br/>
           <Row className="">
             <Col md="auto" className="center">
               <h1 className="title">おめでとう！</h1>
@@ -73,7 +75,7 @@ const Good = () => {
             </Col>
           </Row>
           <Button
-            variant="outline-primary"
+            variant="link"
             onClick={() => {
               router.push("/");
             }}
